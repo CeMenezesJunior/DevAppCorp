@@ -5,38 +5,35 @@
  */
 package persistencia;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
-
 /**
  *
  * @author edu_j
  */
-public class JPAVolumeDAO implements VolumeDAO{
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+public class JPAArtigoDAO implements ArtigoDAO{
     private EntityManager em;
     
-    public JPAVolumeDAO(){  
-    }
-    
     @Override
-    public void salva(Volume v){
-        em = JPAUtil.getEM();
-        EntityTransaction et = em.getTransaction();
-        et.begin();;
-        em.persist(v);
-        et.commit();
-        em.close();
-    }
-    
-    @Override
-    public Volume recupera(Long id){
+    public void salva(Artigo a){
         em = JPAUtil.getEM();
         EntityTransaction et = em.getTransaction();
         et.begin();
-        Volume v = em.find(Volume.class, id);
+        em.persist(a);
         et.commit();
         em.close();
-        return v;
+    }
+    
+    @Override
+    public Artigo recupera(Long id){
+        em = JPAUtil.getEM();
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        Artigo a = em.find(Artigo.class, id);
+        et.commit();
+        em.close();
+        return a;
     }
 }
